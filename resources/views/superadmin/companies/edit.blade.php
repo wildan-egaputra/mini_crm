@@ -69,7 +69,7 @@
             <input type="url" id="website" name="website" value="{{ $company->website }}" required>
 
             <button type="submit" class="btn">Simpan</button>
-            <a href="{{ route('companies.index') }}" class="btn btn-danger">Batal</a>
+            <a href="{{ route('superadmin.companies.index') }}" class="btn btn-danger">Batal</a>
         </form>
     </div>
 </body>

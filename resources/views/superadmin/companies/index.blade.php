@@ -167,6 +167,7 @@
             margin-bottom: 20px;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="container mt-5">
@@ -197,11 +198,11 @@
                         <td>{{ $company->id }}</td>
                         <td>{{ $company->name }}</td>
                         <td>{{ $company->email }}</td>
-                        <td><img src="{{ asset('storage/companies/' . $company->logo) }}" alt="{{ $company->name }}"></td>
+                        <td><img src="{{ asset('storage/companies/' . $company->logo) }}" alt="{{ $company->name }}" style="width: 500px; height: 500px;"></td>
                         <td>{{ $company->website }}</td>
                         <td>
                             <a href="{{ route('superadmin.companies.edit', $company->id) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('superadmin.companies.destroy', $company->id) }}" method="POST" style="display:inline-block;">
+                            <form action="{{ route('superadmin.companies.destroy', $company->id) }}" method="POST" class="delete-form" style="display:inline-block;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
@@ -215,8 +216,16 @@
         {{ $companies->links() }}
     </div>
 
-    <!-- Pastikan Anda telah memuat JavaScript framework seperti Bootstrap atau jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.delete-form').on('submit', function(event) {
+                var result = confirm('Apakah Anda yakin ingin menghapus data ini?');
+                if (!result) {
+                    event.preventDefault();
+                }
+                return result;
+            });
+        });
+    </script>
 </body>
 </html>

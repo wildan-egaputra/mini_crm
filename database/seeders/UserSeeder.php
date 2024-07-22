@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('password'),
-            'usertype' => 'admin', // Menggunakan kolom 'usertype' untuk membedakan jenis pengguna
+            'usertype' => 'admin',
         ]);
 
         // Create Superadmin user
@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
             'name' => 'Superadmin',
             'email' => 'superadmin@superadmin.com',
             'password' => Hash::make('password'),
-            'usertype' => 'superadmin', // Menggunakan kolom 'usertype' untuk membedakan jenis pengguna
+            'usertype' => 'superadmin', 
         ]);
     }
 }

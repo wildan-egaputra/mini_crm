@@ -66,11 +66,10 @@
             margin-bottom: 20px;
         }
         .table th, .table td {
-            padding: 10px;  /* Membuat padding lebih besar */
+            padding: 15px; /* Perbesar padding */
             text-align: left;
-            font-size: 14px; /* Menyesuaikan ukuran font */
+            font-size: 14px; /* Perbesar ukuran font */
             vertical-align: middle;
-            border: 1px solid #444; /* Menambah border */
         }
         .table th {
             background-color: #333;
@@ -122,6 +121,7 @@
             display: inline-block; /* Show only Previous and Next */
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -144,7 +144,7 @@
                         <td>
                             <a href="{{ route('divisi.show', $divisi->id) }}" class="btn btn-info">Lihat</a>
                             <a href="{{ route('divisi.edit', $divisi->id) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('divisi.destroy', $divisi->id) }}" method="POST" style="display: inline-block;">
+                            <form action="{{ route('divisi.destroy', $divisi->id) }}" method="POST" class="delete-form" style="display: inline-block;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Hapus</button>
@@ -168,5 +168,16 @@
             @endif
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('.delete-form').on('submit', function(event) {
+                var result = confirm('Apakah Anda yakin ingin menghapus data ini?');
+                if (!result) {
+                    event.preventDefault();
+                }
+                return result;
+            });
+        });
+    </script>
 </body>
 </html>

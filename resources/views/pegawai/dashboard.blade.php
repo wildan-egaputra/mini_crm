@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Navbar Example</title>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,7 +23,6 @@
         .navbar {
             background-color: #bcbcbc;
             overflow: hidden;
-
             width: 700px;
             border-radius: 100px;
             margin-top: 250px;
@@ -31,7 +32,7 @@
             justify-content: center;
             transition: scale 0.2s linear;
         }
-        .navbar:hover{
+        .navbar:hover {
             scale: 1.05;
         }
         .navbar a {
@@ -44,12 +45,10 @@
             cursor: none;
             z-index: 9999;
             transition: color 0.3s linear, transform 0.3s linear;
-
         }
         .navbar a:hover {
             transform: translateY(-5px);
             color: yellow;
-
         }
         .navbar a.active {
             background-color: #4CAF50;
@@ -101,7 +100,6 @@
             color: #000000;
             cursor: default;
             z-index: -9999;
-            
         }
         #light {
             position: absolute;
@@ -132,10 +130,9 @@
                 <a href="divisi/">Divisi</a>
                 
                 <div class="navbar-right">
-                    <a href="{{ url('logout') }}" class="logot"><i class='bx bx-log-out'></i></a>
+                    <a href="#" id="logoutButton" class="logot"><i class='bx bx-log-out'></i></a>
                 </div>
-        </div>
-        
+            </div>
         </div>
     </center>
     <script>
@@ -165,7 +162,24 @@
             }
             text.style.textShadow = newShadow;
         });
+
+        document.getElementById('logoutButton').addEventListener('click', function(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Anda akan Logout",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, logout!',
+                cancelButtonText: 'Ngga jadi'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '{{ url("logout") }}';
+                }
+            });
+        });
     </script>
-    
 </body>
 </html>

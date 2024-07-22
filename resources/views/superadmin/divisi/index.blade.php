@@ -121,6 +121,7 @@
             display: inline-block; /* Show only Previous and Next */
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -143,7 +144,7 @@
                         <td>
                             <a href="{{ route('superadmin.divisi.show', $divisi->id) }}" class="btn btn-info">Lihat</a>
                             <a href="{{ route('superadmin.divisi.edit', $divisi->id) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('superadmin.divisi.destroy', $divisi->id) }}" method="POST" style="display: inline-block;">
+                            <form action="{{ route('superadmin.divisi.destroy', $divisi->id) }}" method="POST" class="delete-form" style="display: inline-block;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Hapus</button>
@@ -167,5 +168,16 @@
             @endif
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('.delete-form').on('submit', function(event) {
+                var result = confirm('Apakah Anda yakin ingin menghapus data ini?');
+                if (!result) {
+                    event.preventDefault();
+                }
+                return result;
+            });
+        });
+    </script>
 </body>
 </html>

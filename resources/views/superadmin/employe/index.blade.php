@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Employe</title>
     <style>
-        /* Gaya CSS sama seperti sebelumnya */
         body {
             font-family: Arial, sans-serif;
             background-color: #000000;
@@ -124,6 +123,7 @@
             background-color: #555;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -145,7 +145,7 @@
             <tbody>
                 @foreach($employes as $employe)
                 <tr>
-                    <td>{{ $employe->id }}</td>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $employe->nama_depan }}</td>
                     <td>{{ $employe->nama_belakang }}</td>
                     <td>{{ $employe->company ? $employe->company->name : '-' }}</td>
@@ -153,7 +153,7 @@
                     <td>{{ $employe->phone }}</td>
                     <td>
                         <a href="{{ route('superadmin.employe.edit', $employe->id) }}" class="edit">Edit</a>
-                        <form action="{{ route('superadmin.employe.destroy', $employe->id) }}" method="POST" style="display: inline;">
+                        <form action="{{ route('superadmin.employe.destroy', $employe->id) }}" method="POST" class="delete-form" style="display: inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="delete">Delete</button>
@@ -167,5 +167,16 @@
             {{ $employes->links() }}
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.delete-form').on('submit', function(event) {
+                var result = confirm('Apakah Anda yakin ingin menghapus data ini?');
+                if (!result) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
